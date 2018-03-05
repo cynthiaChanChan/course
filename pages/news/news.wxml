@@ -1,0 +1,25 @@
+<!--pages/news/news.wxml-->
+<import src="../../dist/wxParse/wxParse.wxml" />
+<import src='/dist/header/header.wxml' />
+<view class="page">
+    <template is="header" data="{{...header}}"/>
+    <scroll-view scroll-y="true" style="height: {{height}}px" bindscrolltolower="load">
+        <view class="content">
+            <view class="news_list">
+                <view class="li" wx:for="{{replyTemArray}}" wx:key="{{index}}" data-id="{{news_list[index].id}}" bindtap="goArticle">
+                    <view class="title">
+                        <template is="wxParse" data="{{wxParseData:item}}" />
+                    </view>
+                    <view class="desc clearfix">
+                        <image class="smallPic" src="{{host}}{{news_list[index].shareimage || itemImage}}" mode="aspectFill"></image>
+                        <view class="info">
+                            {{news_list[index].content}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="load_tip" hidden="{{isHide}}">加载中...</view>
+            <image wx:if="{{isOnlyOne}}" id="noMore" src="https://www.korjo.cn/xcx/mosquitoImg/no.png" mode="widthFix"></image>
+        </view>
+    </scroll-view>
+</view>

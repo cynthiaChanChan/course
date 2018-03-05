@@ -1,0 +1,28 @@
+<view class="container">
+    <view id="calender-wrapper">
+        <view id="calender-title" class="clearfix">
+            <view id="date" class="item">               
+            </view>
+        </view>
+        <view class="allWeek week">
+            <view class="list" wx:for="{{weekList}}" wx:key="{{index}}" bindtap="checkCourses" data-index="{{index}}">{{item.title}}</view>
+        </view>
+        <view class="week">
+        	<view class="arrow left" hidden="{{isLeftHidden}}" data-dir="left" bindtap="chooseDate"><image src="../../images/pre.png" mode="widthFix"></image></view>
+            <view class="list" wx:for="{{weekList}}" wx:key="{{index}}" bindtap="checkCourses" data-index="{{index}}">
+                <view class="num {{item.mark}} {{item.num ? 'border' : ''}} {{item.chosen}}">{{item.num}}</view>
+            </view>
+            <view class="arrow right" hidden="{{isRightHidden}}" data-dir="right" bindtap="chooseDate"><image src="../../images/next.png" mode="widthFix"></image></view>
+        </view>
+        <view class="courses">
+            <view class="courseWrapper" wx:for="{{coursesList}}" wx:key="{{index}}">
+                
+            </view>
+            <view class="noCourse" wx:if="{{coursesList.length == 0 ? true : false}}">
+                <text wx:if="{{!isHistory}}">该日暂无待预约课程</text>
+                <text wx:if="{{isHistory}}">已过上课时间</text>
+            </view>
+        </view>
+        <view class="clearfooter"></view>
+    </view>
+</view>

@@ -1,0 +1,111 @@
+page {
+    height: 100%;
+}
+
+.container {
+    position: relative;
+    min-height: 100%;
+    background-color: #f4f4f4;
+    margin-bottom: -200rpx;
+}
+
+#calender-wrapper {
+    color: #fff;
+}
+
+/*日历标题部分*/
+#calender-title {
+    box-sizing: border-box;
+    color: #a194a8;
+    background-color: #7f0d26;
+    font-size: 28rpx;
+    height: 90rpx;
+}
+
+#calender-title .item {
+    margin: 0 auto;
+}
+
+#calender-title #date {
+    position: relative;
+    text-align: center;
+    width: 65%;
+    color: #fff;
+    font-size: 33rpx;
+    height: 90rpx;
+}
+
+#calender-title #date .time {
+    text-align: center;
+    line-height: 90rpx;
+}
+
+
+
+
+/*  日历周部分*/
+.week {
+    color: #fff;
+    padding: 20rpx 20rpx 40rpx 20rpx;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    -webkit-justify-content: space-around;
+    background-color: #450916;
+    border-bottom: 1px solid #d6d6d5;
+}
+
+.week .arrow {
+    padding: 10rpx 0;
+    width: 20%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.week .left {
+    left: 0;
+}
+
+.week .right {
+    right: 0;
+}
+
+.week .arrow image {
+    width: 35rpx;
+    margin: 0 auto;
+}
+
+.week .list {
+    text-align: center;
+    font-size: 32rpx;
+}
+
+.week .list .num {
+    font-size: 33rpx;
+    margin-top: 40rpx;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items:center;
+    -webkit-align-items:center;
+    width: 65rpx;
+    height: 65rpx;
+    border-radius: 50%;
+}
+
+.week .list .num.border {
+    border: 1px solid #d6d6d6;
+}
+
+.week .list .num.active {
+    background-color: #bf002a;
+    border: none;
+    color: #fff;
+}
+
+.week .list .num.today {
+    border-color: #bf002a;
+}

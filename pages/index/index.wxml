@@ -1,0 +1,7 @@
+<view class="page">
+  <image class="logo" src="{{img}}/logo.png" mode="widthFix"></image>
+  <view class="appName">课程小介绍</view>
+  <view class="title"><text space="ensp">课程安排 一目了然</text></view>
+  <view class="button" bindtap="goWeek">点击进入</view>
+  <view class="intro" bindtap="goIntro">粉我吧科技出品</view>
+</view>

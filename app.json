@@ -1,0 +1,17 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/faq/faq",
+    "pages/baike/baike",
+    "pages/article/article",
+    "pages/supnews/supnews",
+    "pages/news/news",
+    "pages/week/week"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#f9f9f9",
+    "navigationBarTitleText": "课程小介绍",
+    "navigationBarTextStyle":"black"
+  }
+}
