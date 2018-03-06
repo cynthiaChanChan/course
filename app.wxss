@@ -15,7 +15,7 @@ image {
    display: block;
 }
 
-view, input, checkbox, textarea {
+view, input, checkbox, textarea, swiper-item {
     box-sizing: border-box;
 }
 

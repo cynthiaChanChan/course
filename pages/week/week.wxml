@@ -7,22 +7,85 @@
         <view class="allWeek week">
             <view class="list" wx:for="{{weekList}}" wx:key="{{index}}" bindtap="checkCourses" data-index="{{index}}">{{item.title}}</view>
         </view>
-        <view class="week">
-        	<view class="arrow left" hidden="{{isLeftHidden}}" data-dir="left" bindtap="chooseDate"><image src="../../images/pre.png" mode="widthFix"></image></view>
-            <view class="list" wx:for="{{weekList}}" wx:key="{{index}}" bindtap="checkCourses" data-index="{{index}}">
-                <view class="num {{item.mark}} {{item.num ? 'border' : ''}} {{item.chosen}}">{{item.num}}</view>
+        <swiper bindchange="changeSwiper" current="{{swiperCurrent}}">
+            <block wx:for="{{swipers}}" wx:key="index" wx:for-index="{{idx}}">
+                <swiper-item class="week" style="height: auto;">
+                	<view class="arrow left" hidden="{{isLeftHidden}}" data-dir="left" bindtap="chooseDate"><image src="../../images/pre.png" mode="widthFix"></image></view>
+                    <view class="list" wx:for="{{weekList}}" wx:key="{{index}}" bindtap="checkCourses" data-index="{{index}}">
+                        <view class="num {{item.mark}} {{item.num ? 'border' : ''}} {{item.chosen}}">{{item.num}}</view>
+                    </view>
+                    <view class="arrow right" hidden="{{isRightHidden}}" data-dir="right" bindtap="chooseDate"><image src="../../images/next.png" mode="widthFix"></image></view>
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+    <view class="content-container">
+       <view class="courses-container">
+            <view class="course">
+                <view class="item">
+                    <view class="top">10:00</view>
+                    <view class="middle">至</view>
+                    <view class="bottom">19:00</view>
+                </view>
+                <view class="item course-content">
+                    <view class="top">课程：芭蕾舞</view>
+                    <view class="bottom">教师：Andy</view>
+                </view>
+                <view class="item">
+                    <text>课程\n介绍</text>
+                </view>
             </view>
-            <view class="arrow right" hidden="{{isRightHidden}}" data-dir="right" bindtap="chooseDate"><image src="../../images/next.png" mode="widthFix"></image></view>
+            <view class="course">
+                <view class="item">
+                    <view class="top">10:00</view>
+                    <view class="middle">至</view>
+                    <view class="bottom">19:00</view>
+                </view>
+                <view class="item course-content">
+                    <view class="top">课程：芭蕾舞</view>
+                    <view class="bottom">教师：Andy</view>
+                </view>
+                <view class="item">
+                    <text>课程\n介绍</text>
+                </view>
+            </view>
+       </view>
+       <view class="events-container">
+            <view class="event">
+                <view class="icon-wrapper">
+                    <view class="event-icon">节日</view>
+                </view>
+                <view class="event-title">妇女节</view>
+            </view>
+            <view class="event">
+                <view class="icon-wrapper">
+                    <view class="event-icon">节日</view>
+                </view>
+                <view class="event-title">妇女节</view>
+            </view>
+            <view class="event user-event">
+                <view class="icon-wrapper">
+                    <view class="event-icon">我的事件</view>
+                </view>
+                <view class="event-title">妇女节</view>
+            </view>
+       </view>    
+    </view>
+    <view class="footer-buttons">
+        <view class="button-bg small">
+            <view class="button">
+                <text>日历\n预览</text>
+            </view>
         </view>
-        <view class="courses">
-            <view class="courseWrapper" wx:for="{{coursesList}}" wx:key="{{index}}">
-                
-            </view>
-            <view class="noCourse" wx:if="{{coursesList.length == 0 ? true : false}}">
-                <text wx:if="{{!isHistory}}">该日暂无待预约课程</text>
-                <text wx:if="{{isHistory}}">已过上课时间</text>
+        <view class="button-bg big">
+            <view class="button">
+                <text>课程\n介绍</text>
             </view>
         </view>
-        <view class="clearfooter"></view>
+        <view class="button-bg small">
+            <view class="button">
+                <text>添加\n事件</text>
+            </view>
+        </view>
     </view>
 </view>

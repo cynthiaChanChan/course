@@ -5,7 +5,8 @@ const request = require('../../utils/request');
 Page({
     data: {
         img: util.data.img,
-        chosenIdx: ""
+        chosenIdx: "",
+        swipers: [{}, {}, {}]
     },
     onLoad() {
         const that = this;
@@ -15,7 +16,7 @@ Page({
         let weekObj = "";
         let weekIdx = "";
         //找到今日
-        for (let i = 0; i < this.dateObj.WholeMonth.length; i += 1) {
+        for (let i = 0; i < this.dateObj.WholeMonth.length -1; i += 1) {
             for (let one of this.dateObj.WholeMonth[i].weekdays) {
                 if (one.num == this.dateObj.day) {
                     weekObj = this.dateObj.WholeMonth[i];
@@ -49,7 +50,12 @@ Page({
             })
         }
         let isLeftHidden = this.hideLeft(firstDay);
-        this.setData({weekList, date, isLeftHidden, chosenIdx});
+        this.setData({
+            weekList, 
+            date, 
+            isLeftHidden, 
+            chosenIdx,
+        });
         return firstDay;
     },
     setWholeMonth: function() {
@@ -71,14 +77,72 @@ Page({
         }
         this.dateObj.WholeMonth = calendar.createMonthData(WholeMonth, this.dateObj.month, this.dateObj.year);
     },
+    chooseDate(e) {
+        const dir = e.currentTarget.dataset.dir;
+        let isRightHidden = false;
+        const weeks = this.dateObj.weeks;
+        //往左减少日期，vice versa
+        if (dir == "left") {
+            if (this.dateObj.weekIdx > 0) {
+                this.dateObj.weekIdx -= 1;
+            } else {
+                if (this.dateObj.month == 1) {
+                    this.dateObj.month = 12;
+                    this.dateObj.year -= 1;
+                } else {
+                    this.dateObj.month -= 1;
+                }
+                this.setWholeMonth();
+                this.dateObj.weekIdx = this.dateObj.weeks - 1;
+            }
+        } else {
+            if (this.dateObj.weekIdx < this.dateObj.weeks - 1) {
+                this.dateObj.weekIdx += 1;
+            } else {
+                this.dateObj.weekIdx = 0;
+                if (this.dateObj.month == 12) {
+                    this.dateObj.month = 1;
+                    this.dateObj.year += 1;
+                } else {
+                    this.dateObj.month += 1;
+                }
+                this.setWholeMonth();
+            }
+        }
+        let firstDay = this.setThisWeek(this.dateObj.WholeMonth[this.dateObj.weekIdx]);
+        //const coach_id = wx.getStorageSync('golfLogin').id;
+        const weekList = this.data.weekList;
+        const chosenIdx = this.data.chosenIdx;
+        //待获取数据
+    },
     hideLeft(firstDay) {
         let isLeftHidden = false;
-        //无法点击去过去的时间
-        const now = new Date().getTime();
+        //无法点击去2018以前的时间
+        const now = new Date(2018, 0, 1, 0, 1).getTime();
         const calenderTime = util.formatDate(`${this.dateObj.year}-${this.dateObj.month}-${firstDay.num} 00:00:00`);
         if (now > calenderTime.getTime()) {
           isLeftHidden = true;
+          this.setData({
+            swiperCurrent: 0
+          })
         }
         return isLeftHidden;
+    },
+    changeSwiper(e) {
+        console.log(e)
+        if (e.detail.source != "touch") {
+            return;
+        }
+        const current = e.detail.current;
+        if (current == 2) {
+            e.currentTarget.dataset.dir = "right";
+        } else if (current == 0){
+            e.currentTarget.dataset.dir = "left";
+        }
+        // 保持可以滑动//因为swipers长度为3，1即可左右滑动
+        this.setData({
+            swiperCurrent: 1
+        })     
+        this.chooseDate(e);
     }
 })

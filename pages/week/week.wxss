@@ -3,14 +3,19 @@ page {
 }
 
 .container {
+    /*90 + 115 + 80*/
+    padding-top: 285rpx;
     position: relative;
-    min-height: 100%;
+    height: 100%;
     background-color: #f4f4f4;
-    margin-bottom: -200rpx;
 }
 
 #calender-wrapper {
     color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
 }
 
 /*日历标题部分*/
@@ -44,20 +49,34 @@ page {
 
 
 /*  日历周部分*/
+
+swiper {
+    /*65 + 25 + 25*/
+    height: 115rpx;
+}
+
 .week {
+    padding: 0 50rpx;
+    position: relative;
     color: #fff;
-    padding: 20rpx 20rpx 40rpx 20rpx;
     display: flex;
     display: -webkit-flex;
     justify-content: space-around;
     -webkit-justify-content: space-around;
+    align-items: center;
+    -webkit-align-items: center;
     background-color: #450916;
-    border-bottom: 1px solid #d6d6d5;
+}
+
+.allWeek.week {
+    height: 80rpx;
+    border-top: 2rpx solid #6a051b;
+    background-color: #7f0d26;
 }
 
 .week .arrow {
     padding: 10rpx 0;
-    width: 20%;
+    width: 55rpx;
     position: absolute;
     top: 50%;
     -webkit-transform: translateY(-50%);
@@ -65,11 +84,11 @@ page {
 }
 
 .week .left {
-    left: 0;
+    left: 0rpx;
 }
 
 .week .right {
-    right: 0;
+    right: 0rpx;
 }
 
 .week .arrow image {
@@ -84,7 +103,6 @@ page {
 
 .week .list .num {
     font-size: 33rpx;
-    margin-top: 40rpx;
     display: flex;
     display: -webkit-flex;
     justify-content: center;
@@ -108,4 +126,189 @@ page {
 
 .week .list .num.today {
     border-color: #bf002a;
+}
+
+/*课程与事件*/
+
+.content-container {
+    font-size: 30rpx;
+    color: #fff;
+    overflow-y: auto;
+    min-height: 100%;
+    background: bottom /cover url("https://www.korjo.cn/xcx/courseImg/poster01.jpg") no-repeat;
+}
+
+.courses-container .course, .events-container .event {
+    padding: 20rpx 0;
+    margin-top: 8rpx;
+    height: 145rpx;
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    -webkit-align-items: center;
+    background-color: rgba(0,0,0,.35);
+}
+
+.courses-container .course .item {
+    height: 100%;
+}
+
+.courses-container .course .item.course-content {
+    width: 70%;
+}
+
+.courses-container .course .item {
+    position: relative;
+    line-height: 1;
+
+}
+
+.courses-container .course .item .top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.courses-container .course .item .middle {
+    font-size: 25rpx;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 0;
+}
+
+.courses-container .course .item .bottom {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.courses-container .course .item:first-of-type {
+    text-align: center;
+    width: 17%;
+}
+
+
+.courses-container .course .item:last-of-type {
+    border-left: 1px solid #fff;
+    padding-left: 20rpx;
+    display: table;
+    line-height: 1.2;
+    width: 15%;
+}
+
+.courses-container .course .item:last-of-type text{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.events-container .event {
+    height: 80rpx;
+}
+
+.events-container .event .icon-wrapper {
+    width: 17%;
+    position: relative;
+    color: #000;
+    font-size: 25rpx;
+}
+
+.events-container .event .event-icon {
+    border-radius: 30rpx;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: #f87c7c;
+    padding: 10rpx 0;
+    line-height: 1;
+    text-align: center;
+}
+
+.events-container .event.user-event .event-icon {
+    width: 100%;
+    background-color: #d90030;
+    left: 20%;
+    top: 50%;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}
+
+
+/*footer按钮*/
+
+.footer-buttons {
+    color: #fff; 
+    position: absolute;
+    bottom: 40rpx;
+    left: 50%;
+    width: 100%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+}
+
+.footer-buttons .button-bg {
+    border-radius: 50%;
+}
+
+.footer-buttons .button-bg.big {
+    background-color: rgba(167,19,51,.4);
+    font-size: 29rpx;
+    line-height: 1.2;
+    height: 132rpx;
+    width: 132rpx;
+    padding: 12rpx;
+    margin: 0 20rpx;
+}
+
+.footer-buttons .button-bg.small {
+    font-size: 25rpx;
+    line-height: 1.2;
+    height: 110rpx;
+    width: 110rpx;
+    padding: 10rpx;
+}
+
+.footer-buttons .button-bg:first-of-type {
+    background-color: rgba(202,136,51,.4);
+}
+
+.footer-buttons .button-bg:last-of-type {
+    background-color: rgba(63,158,79,.4);
+}
+
+.footer-buttons .button-bg .button {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+}
+
+.footer-buttons .button-bg.big .button {
+    background-color: #a71333;
+}
+
+.footer-buttons .button-bg:first-of-type .button {
+    background-color: #ca8833;
+}
+
+.footer-buttons .button-bg:last-of-type .button {
+    background-color: #3f9e4f;
 }
