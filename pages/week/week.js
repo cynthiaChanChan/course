@@ -6,43 +6,40 @@ Page({
     data: {
         img: util.data.img,
         chosenIdx: "",
-        swipers: [{}, {}, {}]
+        swipers: [{}, {}, {}],
+        swiperCurrent: 1
     },
     onLoad() {
         const that = this;
         //现在所在的具体日期信息
         this.dateObj = util.getNowObj();
         this.setWholeMonth();
-        let weekObj = "";
-        let weekIdx = "";
-        //找到今日
-        for (let i = 0; i < this.dateObj.WholeMonth.length -1; i += 1) {
-            for (let one of this.dateObj.WholeMonth[i].weekdays) {
-                if (one.num == this.dateObj.day) {
-                    weekObj = this.dateObj.WholeMonth[i];
-                    this.dateObj.weekIdx = i;
-                }
-            }
-        }
-        this.setThisWeek(weekObj);
     },
-    setThisWeek: function(weekObj) {
+    setThisWeek: function(weekObj, isChoosen) {
+        const dateObj = this.dateObj;
         let weekList = util.templateList();
         let chosenIdx = "";
         let firstDay = "";
         for (let i = 0; i < 7; i += 1) {
             weekList[i].num = weekObj.weekdays[i].num;
-            if (weekObj.weekdays[i].num == this.dateObj.day && this.dateObj.theMonth == this.dateObj.month && this.dateObj.theYear == this.year) {
+            weekList[i].off = weekObj.weekdays[i].off;
+            if (weekObj.weekdays[i].num == dateObj.day && dateObj.theMonth == dateObj.month && dateObj.theYear == dateObj.year) {
                 //标记今天
                 weekList[i].mark = "today";
                 weekList[i].chosen = 'active';
                 chosenIdx = i;
+            } else if (isChoosen) {
+                //from choose date, then the firstDay can't be the active day
+                if (weekObj.weekdays[i].num == dateObj.day) {
+                    weekList[i].chosen = 'active';
+                    chosenIdx = i;
+                }
             }
         }
-        let date = `${this.dateObj.year}年${this.dateObj.month}月 第${weekObj.weekNum}周`;
         firstDay = weekList.find((elem) => {
             return elem.num
         })
+        
         if (!chosenIdx) {
             firstDay.chosen = 'active';
             chosenIdx = weekList.findIndex((elem) => {
@@ -50,15 +47,18 @@ Page({
             })
         }
         let isLeftHidden = this.hideLeft(firstDay);
+        const beDate = [dateObj.year, util.formatNumber(dateObj.month), util.formatNumber(weekList[chosenIdx].num)];
         this.setData({
-            weekList, 
-            date, 
+            weekList,  
             isLeftHidden, 
             chosenIdx,
+            beStart: `${dateObj.year}-01-01`,
+            beDate,
+            beEnd: `${dateObj.year + 1}-12-31`
         });
         return firstDay;
     },
-    setWholeMonth: function() {
+    setWholeMonth: function(isChoosen) {
         const chineseWeekday = ["一","二","三","四","五","六", "日"];
         //每月周数weeks
         this.dateObj.weeks = util.weeksCount(this.dateObj.year, this.dateObj.month);
@@ -75,40 +75,19 @@ Page({
                 weekdays
             })
         }
-        this.dateObj.WholeMonth = calendar.createMonthData(WholeMonth, this.dateObj.month, this.dateObj.year);
+        calendar.createMonthData(WholeMonth, this.dateObj.month, this.dateObj.year).then(res => {
+            this.dateObj.WholeMonth = res;
+            this.findTheWeek();
+            //找到今天所在的周
+            this.setThisWeek(this.dateObj.WholeMonth[this.dateObj.weekIdx], isChoosen);
+        });
     },
     chooseDate(e) {
         const dir = e.currentTarget.dataset.dir;
         let isRightHidden = false;
         const weeks = this.dateObj.weeks;
         //往左减少日期，vice versa
-        if (dir == "left") {
-            if (this.dateObj.weekIdx > 0) {
-                this.dateObj.weekIdx -= 1;
-            } else {
-                if (this.dateObj.month == 1) {
-                    this.dateObj.month = 12;
-                    this.dateObj.year -= 1;
-                } else {
-                    this.dateObj.month -= 1;
-                }
-                this.setWholeMonth();
-                this.dateObj.weekIdx = this.dateObj.weeks - 1;
-            }
-        } else {
-            if (this.dateObj.weekIdx < this.dateObj.weeks - 1) {
-                this.dateObj.weekIdx += 1;
-            } else {
-                this.dateObj.weekIdx = 0;
-                if (this.dateObj.month == 12) {
-                    this.dateObj.month = 1;
-                    this.dateObj.year += 1;
-                } else {
-                    this.dateObj.month += 1;
-                }
-                this.setWholeMonth();
-            }
-        }
+        calendar.createNewDateObj(dir, this.dateObj, this.setWholeMonth);
         let firstDay = this.setThisWeek(this.dateObj.WholeMonth[this.dateObj.weekIdx]);
         //const coach_id = wx.getStorageSync('golfLogin').id;
         const weekList = this.data.weekList;
@@ -129,7 +108,6 @@ Page({
         return isLeftHidden;
     },
     changeSwiper(e) {
-        console.log(e)
         if (e.detail.source != "touch") {
             return;
         }
@@ -144,5 +122,57 @@ Page({
             swiperCurrent: 1
         })     
         this.chooseDate(e);
+    },
+    chooseBeDate: function(e) {
+        const date = e.detail.value;
+        const beDate = date.split("-");
+        this.setData({beDate});
+        const that = this;
+        const now = util.formatDate(`${date.replace(/-0/gi, '-')}T01:00:00`);
+        this.dateObj.year = now.getFullYear();
+        this.dateObj.month = now.getMonth() + 1;
+        this.dateObj.day = now.getDate();
+        this.dateObj.weekday = now.getDay();
+        this.setWholeMonth(true);
+    },
+    goEdit() {
+        wx.navigateTo({
+            url: "../edit/edit"
+        })
+    },
+    goCalendar() {
+        wx.navigateTo({
+            url: "../calendar/calendar?mm=" + this.dateObj.month + "&yy=" + this.dateObj.year
+        })
+    },
+    goToday() {
+        this.onLoad();
+    },
+    checkCourses(e) {
+        const index = e.currentTarget.dataset.index;
+        const weekList = this.data.weekList;
+        const beDate = this.data.beDate;
+        //const coach_id = "";
+        let chosenIdx = this.data.chosenIdx;
+        if (!weekList[index].num) {
+            return;
+        }
+        weekList[chosenIdx].chosen = "";
+        weekList[index].chosen = "active";
+        chosenIdx = index;
+        //同步更新日期选择器的显示天
+        beDate[2] = util.formatNumber(weekList[index].num);
+        this.setData({weekList, chosenIdx, beDate});
+        const now = util.formatDate(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} 00:00:00`);
+        //this.GetGolfCurriculumByCoachID(coach_id, `${this.year}-${util.formatNumber(this.month)}-${util.formatNumber(weekList[index].num)}`);
+    },
+    findTheWeek() {
+        for (let i = 0; i < this.dateObj.WholeMonth.length -1; i += 1) {
+            for (let one of this.dateObj.WholeMonth[i].weekdays) {
+                if (one.num == this.dateObj.day) {
+                    this.dateObj.weekIdx = i;
+                }
+            }
+        }
     }
 })

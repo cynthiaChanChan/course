@@ -3,8 +3,8 @@ page {
 }
 
 .container {
-    /*90 + 115 + 80*/
-    padding-top: 285rpx;
+    /*100 + 115 + 80*/
+    padding-top: 295rpx;
     position: relative;
     height: 100%;
     background-color: #f4f4f4;
@@ -20,35 +20,66 @@ page {
 
 /*日历标题部分*/
 #calender-title {
+    position: relative;
     box-sizing: border-box;
-    color: #a194a8;
     background-color: #7f0d26;
-    font-size: 28rpx;
-    height: 90rpx;
+    height: 100rpx;
 }
 
-#calender-title .item {
-    margin: 0 auto;
-}
 
 #calender-title #date {
-    position: relative;
-    text-align: center;
-    width: 65%;
+    line-height: 1;
+    position: absolute;
+    top: 20rpx;
+    left: 20rpx;
+    width: 43%;
     color: #fff;
-    font-size: 33rpx;
-    height: 90rpx;
+    font-size: 34rpx;
+    background: center right 10rpx/20rpx auto url("https://www.korjo.cn/xcx/courseImg/triangle.png") no-repeat;
 }
 
-#calender-title #date .time {
-    text-align: center;
-    line-height: 90rpx;
+#calender-title #date picker{
+    height: 100%;
+    width: 100%;    
 }
 
+#calender-title #date .picker {
+    width: 100%;
+}
 
+#calender-title #date .picker .unit{
+    font-size: 29rpx;
+}
 
+#calender-title .lunar {
+    line-height: 1;
+    font-size: 22rpx;
+    position: absolute;
+    bottom: 20rpx;
+    left: 20rpx;
+}
 
-/*  日历周部分*/
+#calender-title .goToday {
+    width: 70rpx;
+    height: 70rpx;
+    position: absolute;
+    right: 30rpx;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 22rpx;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    line-height: 1.2;
+}
+
+/* 日历周部分*/
 
 swiper {
     /*65 + 25 + 25*/
@@ -97,6 +128,7 @@ swiper {
 }
 
 .week .list {
+    position: relative;
     text-align: center;
     font-size: 32rpx;
 }
@@ -128,6 +160,15 @@ swiper {
     border-color: #bf002a;
 }
 
+.week .list .off {
+    height: 30rpx;
+    width: 30rpx;
+    font-size: 20rpx;
+    position: absolute;
+    top: -14rpx;
+    right: -14rpx;
+}
+
 /*课程与事件*/
 
 .content-container {
@@ -138,7 +179,7 @@ swiper {
     background: bottom /cover url("https://www.korjo.cn/xcx/courseImg/poster01.jpg") no-repeat;
 }
 
-.courses-container .course, .events-container .event {
+.courses-container .course {
     padding: 20rpx 0;
     margin-top: 8rpx;
     height: 145rpx;
@@ -207,37 +248,47 @@ swiper {
 }
 
 .events-container .event {
-    height: 80rpx;
-}
-
-.events-container .event .icon-wrapper {
-    width: 17%;
     position: relative;
-    color: #000;
-    font-size: 25rpx;
+    height: 80rpx;
+    background-color: rgba(0,0,0,.35);
+    margin-top: 8rpx;
 }
 
 .events-container .event .event-icon {
+    margin-left: 30rpx;
+    color: #000;
+    font-size: 25rpx;
+    display: inline-block;
+    vertical-align: middle;
     border-radius: 30rpx;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 60%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
     background-color: #f87c7c;
-    padding: 10rpx 0;
+    padding: 10rpx 15rpx;
     line-height: 1;
     text-align: center;
 }
 
+.events-container .event .event-title {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 20rpx;
+    line-height: 80rpx;
+    width: 65%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .events-container .event.user-event .event-icon {
-    width: 100%;
     background-color: #d90030;
-    left: 20%;
+}
+
+.events-container .event.user-event .edit {
+    width: 38rpx;
+    position: absolute;
+    right: 30rpx;
     top: 50%;
-    -webkit-transform: translate(0, -50%);
-    transform: translate(0, -50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 

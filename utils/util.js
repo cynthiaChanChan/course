@@ -234,6 +234,7 @@ function getNowObj() {
 	const today = new Date();
 	return {
 		year: today.getFullYear(),
+		theYear: today.getFullYear(),
 		month: today.getMonth() + 1,
 		theMonth: today.getMonth() + 1,
 		day: today.getDate(),

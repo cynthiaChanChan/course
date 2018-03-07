@@ -1,8 +1,17 @@
 <view class="container">
     <view id="calender-wrapper">
         <view id="calender-title" class="clearfix">
-            <view id="date" class="item">               
+            <view id="date"> 
+                <picker bindchange="chooseBeDate" mode="date" value="{{beDate}}" start="{{beStart}}" end="{{beEnd}}">
+                   <view class="picker">
+                       {{beDate[0]}}<text space="nbsp" class="unit"> 年 </text>{{beDate[1]}}<text space="nbsp" class="unit"> 月 </text>{{beDate[2]}}<text space="nbsp" class="unit"> 日 </text>
+                   </view>
+                </picker>              
             </view>
+            <view class="lunar">
+                <text space="nbsp">农历 丁酉【鸡】年  冬月  初八  摩羯座   </text>
+            </view>
+            <view class="goToday" bindtap="goToday"><text>返回\n今天</text></view>
         </view>
         <view class="allWeek week">
             <view class="list" wx:for="{{weekList}}" wx:key="{{index}}" bindtap="checkCourses" data-index="{{index}}">{{item.title}}</view>
@@ -13,6 +22,7 @@
                 	<view class="arrow left" hidden="{{isLeftHidden}}" data-dir="left" bindtap="chooseDate"><image src="../../images/pre.png" mode="widthFix"></image></view>
                     <view class="list" wx:for="{{weekList}}" wx:key="{{index}}" bindtap="checkCourses" data-index="{{index}}">
                         <view class="num {{item.mark}} {{item.num ? 'border' : ''}} {{item.chosen}}">{{item.num}}</view>
+                        <view wx:if="{{item.off}}" class="off">休</view>
                     </view>
                     <view class="arrow right" hidden="{{isRightHidden}}" data-dir="right" bindtap="chooseDate"><image src="../../images/next.png" mode="widthFix"></image></view>
                 </swiper-item>
@@ -52,27 +62,22 @@
        </view>
        <view class="events-container">
             <view class="event">
-                <view class="icon-wrapper">
-                    <view class="event-icon">节日</view>
-                </view>
+                <view class="event-icon">节日</view>
                 <view class="event-title">妇女节</view>
             </view>
             <view class="event">
-                <view class="icon-wrapper">
-                    <view class="event-icon">节日</view>
-                </view>
+                <view class="event-icon">节日</view>
                 <view class="event-title">妇女节</view>
             </view>
-            <view class="event user-event">
-                <view class="icon-wrapper">
-                    <view class="event-icon">我的事件</view>
-                </view>
-                <view class="event-title">妇女节</view>
+            <view class="event user-event" bindtap="goEdit">
+                <view class="event-icon">我的事件</view>
+                <view class="event-title">公司聚餐 下午6：30</view>
+                <image class="edit" src="../../images/edit.png" mode="widthFix"></image>
             </view>
        </view>    
     </view>
     <view class="footer-buttons">
-        <view class="button-bg small">
+        <view class="button-bg small" bindtap="goCalendar">
             <view class="button">
                 <text>日历\n预览</text>
             </view>

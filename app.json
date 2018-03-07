@@ -4,9 +4,8 @@
     "pages/faq/faq",
     "pages/baike/baike",
     "pages/article/article",
-    "pages/supnews/supnews",
-    "pages/news/news",
-    "pages/week/week"
+    "pages/week/week",
+    "pages/calendar/calendar"
   ],
   "window":{
     "backgroundTextStyle":"light",

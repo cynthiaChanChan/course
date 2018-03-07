@@ -1,0 +1,217 @@
+.page {
+	padding-bottom: 120rpx;
+}
+
+#calender-wrapper {
+	background-color: #fff;
+	position: relative;
+}
+/*日历标题部分*/
+#calender-wrapper #calender-title {
+	position: relative;
+	box-sizing: border-box;
+	background-color: #7f0d26;
+	font-size: 28rpx;
+	height: 90rpx;
+}
+
+#calender-title .goBack {
+	color: #fff;
+    width: 70rpx;
+    height: 70rpx;
+    position: absolute;
+    left: 30rpx;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 22rpx;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -webkit-align-items: center;
+    line-height: 1;
+}
+
+#calender-wrapper #calender-title .eventTitle {
+	letter-spacing: 1px;
+	font-size: 37rpx;
+	color: #fff;
+	float: left;
+	line-height: 90rpx;
+	padding-left: 5%;
+}
+
+#calender-wrapper #calender-title #date {
+	margin: 0 auto;
+	position: relative;
+	text-align: center;
+	width: 60%;
+	color: #fff;
+	font-size: 33rpx;
+	height: 90rpx;
+}
+
+#calender-wrapper #calender-title #date .time {
+	text-align: center;
+	line-height: 90rpx;
+}
+
+#calender-wrapper #calender-title #date .arrow {
+	padding: 10rpx 0;
+	width: 20%;
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+#calender-wrapper #calender-title #date .left {
+	left: 0;
+}
+
+#calender-wrapper #calender-title #date .right {
+	right: 0;
+}
+
+#calender-wrapper #calender-title #date image {
+	width: 35rpx;
+	margin: 0 auto;
+}
+
+/*sun---sat*/
+#calender-wrapper #days {
+	padding: 25rpx 2%;
+	font-size: 29rpx;
+	text-align: center;
+	border-bottom: 1px solid #f0f0f0;
+	margin-bottom: 10rpx;
+}
+
+#calender-wrapper #days .weekday {
+	line-height: 1;
+	width: 14.2%;
+	display: inline-block;
+}
+
+#calender-wrapper #month {
+	padding: 0 2%;
+}
+
+#calender-wrapper #month .day {
+	font-size: 30rpx;
+	color: #909090;
+	box-sizing: border-box;
+	position: relative;
+	text-align: center;
+	width: 14.28%;
+	display: inline-block;
+}
+
+#calender-wrapper #month .day .off {
+	background-color: #7f0d26;
+	color: #fff;
+	height: 30rpx;
+	width: 30rpx;
+	font-size: 20rpx;
+	line-height: 30rpx;
+	border-radius: 50%;
+	position: absolute;
+	top: 5rpx;
+	right: 5rpx;
+}
+
+#calender-wrapper #month .day:nth-of-type(7n+7) {
+	border-right: none;
+}
+
+#calender-wrapper #month .day .num {
+	height: 80rpx;
+	position: relative;
+}
+
+#calender-wrapper #month .day .num .numText{
+	line-height: 65rpx;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 65rpx;
+	height: 65rpx;
+	text-align: center;
+	display: inline-block;
+	border-radius: 50%;
+	-webkit-transition: all .2s;
+     transition: all .2s;
+}
+
+#calender-wrapper #month .day .num.marked .numText{
+	width: 69rpx;
+	height: 69rpx;
+	color: #7f0d26;
+	border: 2rpx solid #7f0d26;
+}
+
+#calender-wrapper #month .day .num.chosen .numText{
+	width: 65rpx;
+	height: 65rpx;
+	color: #fff;
+	background-color: #7f0d26;
+	border: none;
+}
+
+.event_desc {
+	position: relative;
+	background-color: #e9f9f9;
+	border-top: 1px solid #9ecfcf;
+	border-bottom: 1px solid #9ecfcf;
+	padding-top: 30rpx;
+}
+
+.event_desc .golfer {
+	position: absolute;
+	bottom: 20rpx;
+	left: 40rpx;
+	width: 87rpx;
+}
+
+.info {
+	padding: 0rpx 30rpx 30rpx 150rpx;
+}
+
+.info .titleWrapper {
+	margin-bottom: 10rpx;
+}
+
+.info .circle {
+	display: inline-block;
+	vertical-align: middle;
+	border: 1px solid #7f0d26;
+	background-color: #7f0d26;
+	border-radius: 50%;
+	width: 23rpx;
+	height: 23rpx;
+	margin-right: 6rpx;
+}
+
+.info .subtitle {
+	color: #101a27;
+	font-size: 32rpx;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.info .item {
+	color: #626262;
+	font-size: 26rpx;
+}
+
+.noMatch {
+	text-align: center;
+	font-size: 28rpx;
+	color: #626262;
+}
