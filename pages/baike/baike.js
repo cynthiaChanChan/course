@@ -3,11 +3,9 @@ const request = require("../../utils/request");
 Page({
     data: {
         img: util.data.img,
-        host: util.data.host,
-        _tabbar_: {}
+        host: util.data.host
     },
     onLoad() {
-        new Tabbar();
         this.getTypeList();
     },
     getTypeList() {

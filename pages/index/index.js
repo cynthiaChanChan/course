@@ -4,8 +4,14 @@ Page({
         img: util.data.img
     },
     onLoad() {
+        // wx.navigateTo({
+        //     url: "../calendar/calendar?mm=" + 3 + "&yy=" + 2018
+        // })
+        // wx.navigateTo({
+        //     url: "../event/event?yy=2018&mm=03&dd=08"
+        // })
         wx.navigateTo({
-            url: "../calendar/calendar?mm=" + 3 + "&yy=" + 2018
+            url: "../article/article"
         })
     },
     goIntro() {

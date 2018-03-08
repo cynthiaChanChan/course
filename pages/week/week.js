@@ -135,9 +135,10 @@ Page({
         this.dateObj.weekday = now.getDay();
         this.setWholeMonth(true);
     },
-    goEdit() {
+    goEvent() {
+        const beDate = this.data.beDate;
         wx.navigateTo({
-            url: "../edit/edit"
+            url: "../event/event?yy=" + beDate[0] + "&mm=" + beDate[1] + "&dd=" + beDate[2]
         })
     },
     goCalendar() {
@@ -147,6 +148,11 @@ Page({
     },
     goToday() {
         this.onLoad();
+    },
+    goBaike() {
+        wx.navigateTo({
+            url: "../baike/baike"
+        })
     },
     checkCourses(e) {
         const index = e.currentTarget.dataset.index;

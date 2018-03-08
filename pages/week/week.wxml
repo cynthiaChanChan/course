@@ -19,12 +19,12 @@
         <swiper bindchange="changeSwiper" current="{{swiperCurrent}}">
             <block wx:for="{{swipers}}" wx:key="index" wx:for-index="{{idx}}">
                 <swiper-item class="week" style="height: auto;">
-                	<view class="arrow left" hidden="{{isLeftHidden}}" data-dir="left" bindtap="chooseDate"><image src="../../images/pre.png" mode="widthFix"></image></view>
+                	<view class="arrow left" hidden="{{isLeftHidden}}" data-dir="left" bindtap="chooseDate"><image src="{{img}}/pre.png" mode="widthFix"></image></view>
                     <view class="list" wx:for="{{weekList}}" wx:key="{{index}}" bindtap="checkCourses" data-index="{{index}}">
                         <view class="num {{item.mark}} {{item.num ? 'border' : ''}} {{item.chosen}}">{{item.num}}</view>
                         <view wx:if="{{item.off}}" class="off">休</view>
                     </view>
-                    <view class="arrow right" hidden="{{isRightHidden}}" data-dir="right" bindtap="chooseDate"><image src="../../images/next.png" mode="widthFix"></image></view>
+                    <view class="arrow right" hidden="{{isRightHidden}}" data-dir="right" bindtap="chooseDate"><image src="{{img}}/next.png" mode="widthFix"></image></view>
                 </swiper-item>
             </block>
         </swiper>
@@ -69,10 +69,10 @@
                 <view class="event-icon">节日</view>
                 <view class="event-title">妇女节</view>
             </view>
-            <view class="event user-event" bindtap="goEdit">
+            <view class="event user-event" bindtap="">
                 <view class="event-icon">我的事件</view>
                 <view class="event-title">公司聚餐 下午6：30</view>
-                <image class="edit" src="../../images/edit.png" mode="widthFix"></image>
+                <image class="edit" src="{{img}}/edit.png" mode="widthFix"></image>
             </view>
        </view>    
     </view>
@@ -82,12 +82,12 @@
                 <text>日历\n预览</text>
             </view>
         </view>
-        <view class="button-bg big">
+        <view class="button-bg big" bindtap="goBaike">
             <view class="button">
                 <text>课程\n介绍</text>
             </view>
         </view>
-        <view class="button-bg small">
+        <view class="button-bg small" bindtap="goEvent">
             <view class="button">
                 <text>添加\n事件</text>
             </view>

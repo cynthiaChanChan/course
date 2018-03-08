@@ -1,15 +1,32 @@
 <!--pages/article/article.wxml-->
 <import src="../../lib/wxParse/wxParse.wxml" />
-<import src='/template/header/header.wxml' />
 <view class="page">
-  <template is="header" data="{{...header}}"/>
-  <view class="content">
-    <view class="title">
-      <!-- {{subTitle}} -->
-      <template is="wxParse" data="{{wxParseData:title1.nodes}}" />
+    <view class="content" bindtap="hideBox">
+      <view class="title">
+          <!-- {{subTitle}} -->
+          <template is="wxParse" data="{{wxParseData:title1.nodes}}" />
+      </view>
+      <view class="detail">
+          <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+      </view>
     </view>
-    <view class="detail">
-      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    <view class="article-footer">
+        <view class="button" catchtap="showSubmitBox">预约上课</view>
+        <view class="button" catchtap="call">电话咨询</view>
+        <view class="button">到这去</view>
+        <view class="button">分享</view>
     </view>
-  </view>
+    <view class="callBox" hidden="{{iscallBoxHidden}}">
+        <view class="phoneNumber"><text space="nbsp">{{phoneNumber}}</text></view>
+        <view class="choices">
+            <view class="choice" catchtap="cancelPhoneCall">取消</view>
+            <view class="choice" catchtap="makePhoneCall">呼叫</view>
+        </view>
+    </view>
+    <view class="submit-box" hidden="{{isSubmitBoxHidden}}">
+        <view class="inputWrapper"><input maxlength="12" bindinput="nameInput" value="{{nameInput}}" placeholder="姓名"/></view>
+        <view class="inputWrapper"><input maxlength="11" bindblur="phoneBlur" type="digit" bindinput="phoneInput" value="{{phoneInput}}" placeholder="电话"/></view>
+        <view class="inputWrapper"><input maxlength="5"  type="digit" bindinput="numberInput" placeholder="人数" value="{{numberInput}}"/></view>
+        <view catchtap="registrate" class="registrate">提交</view>
+    </view>
 </view>

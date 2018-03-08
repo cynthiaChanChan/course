@@ -8,27 +8,31 @@ Page({
         host: util.data.host,
         id: 0,
         title: '',
-        content: ''
+        content: '',
+        iscallBoxHidden: true,
+        phoneNumber: "15013320137",
+        isSubmitBoxHidden: true,
+        userInput: "",
+        passwordInput: "",
     },
     onLoad: function(options) {
         var _this = this;
-        let imagePadding = 10;
+        options.id = 1;
+        this.registrationData = wx.getStorageSync("registrationData") || {};
         // 页面初始化 options为页面跳转所带来的参数
         request.GetBaikeFQAInfo(options.id).then((result) => {
-            _this.pageTitle = util.getText(result.title);
+            let contentTitle = result.title || "";
+            _this.pageTitle = util.getText(contentTitle);
             let content = "";
-            // 如果是这两类图片路径不一样
-            if (options.type == "球场大全" || options.type == "球星名人") {
-                content = result.content.replace(/<img.*?src=.*?uploads/gi, '<img src="http://www.golfbaike.com/uploads').replace(/&#39;/gi, "'").replace(/<video.*?src="\//gi, '<video src="https://www.korjo.cn//').replace(/<source.*?<\/video>/gi, "</video>").replace(/<style>.*?<\/style>/gi, "").replace(/style=\"WIDTH: .*?px\"/gi, "");
-            } else {
-                content = util.url2abs(result.content)
-            }
             _this.setData({
                 header: {
                     title: options.title
                 },
                 id: options.id,
-                content
+                content,
+                nameInput: _this.registrationData.name || "",
+                phoneInput: _this.registrationData.phone || "",
+                numberInput: _this.registrationData.number || "",
             })
             var article = content;
             /**
@@ -44,7 +48,7 @@ Page({
              let imagePadding = wx.getSystemInfoSync().windowWidth * 0.05;
              console.log("imagePadding ", imagePadding)
             WxParse.wxParse('article', 'html', article, _this, imagePadding);
-            WxParse.wxParse('title1', 'html', result.title, _this, imagePadding);
+            WxParse.wxParse('title1', 'html', contentTitle, _this, imagePadding);
         })
 
     },
@@ -58,6 +62,99 @@ Page({
            fail: function(res) {
             // 转发失败
            }
+        }
+    },
+    call(e) {
+        const that = this;
+        const phoneNumber = this.data.phoneNumber.replace(/(\w{3})(\w{4})(\w{4})/, "$1 $2 $3 ");
+        this.setData({
+            phoneNumber,
+            iscallBoxHidden: false,
+            isSubmitBoxHidden: true
+        })
+    },
+    cancelPhoneCall() {
+        this.setData({
+            iscallBoxHidden: true
+        })
+    },
+    makePhoneCall() {
+        wx.makePhoneCall({
+            phoneNumber: '15013320137'
+        })
+    },
+    showSubmitBox() {
+        this.setData({
+            iscallBoxHidden: true,
+            isSubmitBoxHidden: false
+        })
+    },
+    hideBox() {
+        this.setData({
+            iscallBoxHidden: true,
+            isSubmitBoxHidden: true
+        })
+    },
+    nameInput: function(e) {
+        this.registrationData.name = e.detail.value;
+        wx.setStorageSync("registrationData", this.registrationData);
+        this.setData({
+            nameInput: e.detail.value
+        })
+    },
+    numberInput: function(e) {
+        this.registrationData.number = e.detail.value;
+        wx.setStorageSync("registrationData", this.registrationData);
+        this.setData({
+            numberInput: e.detail.value
+        })
+    },
+    phoneInput: function(e) {
+        this.registrationData.phone = e.detail.value;
+        wx.setStorageSync("registrationData", this.registrationData);
+        this.setData({
+            phoneInput: e.detail.value
+        })
+    },
+    phoneBlur: function(e) {
+        const phone = e.detail.value;
+        this.validatePhone(phone);       
+    },
+    validatePhone: function(phone) {
+        const phoneRe = /^[0-9]{11}$/;
+        const result = phoneRe.test(phone);
+        let hintText = "手机号格式错误"
+        if (!result && phone) {
+            util.alert(hintText);
+            return true;
+        }
+    },
+    registrate() {
+        const that = this;
+        const data = this.data;
+        const name = this.data.nameInput.trim();
+        const phone = this.data.phoneInput.trim();
+        const number = this.data.numberInput.trim();
+        if (this.checkEmpty(name, phone, number)) {
+            return;
+        } else if (this.validatePhone(this.data.phoneInput)) {
+            return;
+        } 
+    },
+    checkEmpty(name, phone, number) {
+        let hintText = "";
+        if (!name && !phone && !number) {
+            hintText = "请填写姓名、电话与人数";
+        } else if (!name) {
+            hintText = "请填写姓名";
+        } else if (!phone) {
+            hintText = "请填写电话";
+        } else if (!number) {
+            hintText = "请填写人数";
+        }
+        if (hintText) {
+            util.alert(hintText);
+            return true;
         }
     },
     goBack: function () {

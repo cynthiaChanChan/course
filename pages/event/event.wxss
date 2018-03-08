@@ -1,0 +1,130 @@
+.page {
+	padding: 30rpx;
+}
+
+.list {
+	position: relative;
+	padding: 20rpx 0 10rpx;
+	border-bottom: 1px solid #cfcfcf;
+}
+
+.list .title-wrapper {
+	font-size: 26rpx;
+	color: #626262;
+	line-height: 1;
+	margin-bottom: 15rpx;
+}
+
+.list .title-wrapper text {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.list .title-wrapper .icon {
+	width: 35rpx;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 10rpx;
+}
+
+.list .inputContainer input {
+	font-size: 30rpx;
+	padding-left: 10rpx;
+}
+
+.list picker{
+	display: inline-block;
+	width: 48%;  
+    line-height: 1;    
+    font-size: 34rpx;
+    background: center right/20rpx auto url("https://www.korjo.cn/xcx/courseImg/triangle_b.png") no-repeat;    
+}
+
+.list picker.first {
+    width: 26%;
+    background-position: center right 50%;
+}
+
+.list picker.second {
+    width: 22%;
+    background-position: center right;   
+}
+
+.list.alarm {
+	padding-top: 30rpx;
+}
+
+.list.alarm .title-wrapper {
+	font-size: 30rpx;
+}
+
+.list .more {
+    font-size: 24rpx;
+    color:#626262;
+    margin: 10rpx 0;
+}
+
+.switch {
+    position: absolute;
+    top: 30rpx;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    height: 46rpx;
+    width: 90rpx;
+    border-radius: 35rpx;
+    color: #6b7381;
+    background: #bdc1c8;
+}
+
+.switch.on {
+    background-color: #7f0d26;
+    transition: background-color 0.25s;
+}
+
+.switch .handle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 2rpx;
+    width: 42rpx;
+    height: 42rpx;
+    border-radius: 50%;
+    background: #fff;
+    transition: left .25s;
+}
+
+.switch.on .handle {
+    left: 46rpx;
+    transition: left .25s;
+}
+
+.event-footer {
+	display: block;
+	width: 440rpx;
+	margin: 30rpx auto;
+}
+
+.event-footer .button{
+	width: 350rpx;
+	height: 73.5rpx;
+	text-align: center;
+	line-height: 73.5rpx;
+	border-radius: 8rpx;
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 30rpx;
+	color: #fff;
+	background-color: #7f0d26;
+	border: none;
+}
+
+.event-footer .cancel {
+	margin-left: 10rpx;
+	display: inline-block;
+	vertical-align: middle;
+	width: 80rpx;
+	height: 73.5rpx;
+}
+

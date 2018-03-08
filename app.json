@@ -5,7 +5,8 @@
     "pages/baike/baike",
     "pages/article/article",
     "pages/week/week",
-    "pages/calendar/calendar"
+    "pages/calendar/calendar",
+    "pages/event/event"
   ],
   "window":{
     "backgroundTextStyle":"light",
