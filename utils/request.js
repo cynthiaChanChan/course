@@ -24,32 +24,6 @@ function upload(filePath) {
 	});
 }
 
-function GetBaikeTypeList(id) {
-	// 百科一级分类接口
-	return util.get('/KorjoApi/GetBaikeTypeAndImageList', { projectid: id });
-}
-
-function GetBaikeTypeByParentID(parentid) {
-    // 子分类接口
-    return util.get('/KorjoApi/GetBaikeTypeByParentID', { parentid });
-}
-
-function GetBaikeFQAList(id, pgnu, pgsize) {
-    // 列表接口
-    return util.get('/KorjoApi/GetBaikeFQAList', {
-        baiketype: id,
-        pgnu,
-        pgsize
-    });
-}
-
-function GetBaikeFQAInfo(id) {
-	// 文章接口
-	return util.get('/KorjoApi/GetBaikeFQAInfo', {
-		id: id
-	});
-}
-
 function GetGolfIntroList() {
 	return util.get('/GolfApi/GetGolfIntroList');
 }
@@ -96,19 +70,6 @@ function SaveLeaveMessageCommon(data) {
 	return util.post('/GolfApi/SaveLeaveMessageCommon', {dataJson: JSON.stringify(data)});
 }
 
-function ValidateUserOpenid(unionid) {
-    return util.get('/KorjoApi/ValidateUserOpenid', {unionid, wxpublic_id: util.data.appid});
-}
-
-function GetMyGolfMakeAppointment(userid) {
-	return util.get('/GolfApi/GetMyGolfMakeAppointment', {userid});
-}
-
-function SaveGolfMakeAppointment(userid, curriculum_id, wxpublic_id) {
-	return util.post('/GolfApi/SaveGolfMakeAppointment', {
-		dataJson: JSON.stringify({userid, curriculum_id, wxpublic_id})
-	});
-}
 
 //定时消息推送
 function SaveSendMsg(sendtime, param, sendtype, openid) {
@@ -133,44 +94,27 @@ function GetFansIntro(wxpublic_id) {
 	return util.get('/KorjoApi/GetFansIntro', {wxpublic_id});
 }
 
-function UpdateOrderPayStatus(id, status) {
-	return util.post('/GolfApi/UpdateOrderPayStatus', {id, status});
+//黄历
+function GetIndexBgImageInfo(date) {
+	//2018-03-12
+	return util.get('/KorjoApi/GetIndexBgImageInfo', {date});
 }
 
-function RunCommon(order_pay_id) {
-	return util.post('/PayApi/RunCommon', {order_pay_id});
-}
-// 保存公众号关注链接
-function SaveDataJsonCommon(wxpublic_id, data) {
-	return util.post('/KorjoApi/SaveDataJsonCommon', {
-		dataJson: JSON.stringify({wxpublic_id, datajson: JSON.stringify(data)})
-	});
+function GetCurriculumBgimageInfo(date) {
+	return util.get('/GspaceApi/GetCurriculumBgimageInfo', {date});
 }
 
-function GetGolfMakeAppointment(id) {
-	return util.get('/GolfApi/GetGolfMakeAppointment', {id});
+function GetCurriculumInformationList() {
+	return util.get('/GspaceApi/GetCurriculumInformationList');
 }
 
-function GetMakeAppointmentCount(openid, year_month) {
-	return util.get('/GolfApi/GetMakeAppointmentCount', {openid, year_month});
-}
-
-function GetAdminCoach(username, password) {
-	return util.get('/GolfApi/GetAdminCoach', {username, password});
-}
-
-function GetGolfCurriculumByCoachID(coach_id, date) {
-	//coach_id=759&date=2018-02-07
-	return util.get('/GolfApi/GetGolfCurriculumByCoachID', {coach_id, date});
+function GetCurriculumInformationInfo(id) {
+	return util.get('/GspaceApi/GetCurriculumInformationInfo', {id});
 }
 
 module.exports = {
     GetSessionKey,
 	upload,
-	GetBaikeTypeList,
-	GetBaikeTypeByParentID,
-	GetBaikeFQAList,
-	GetBaikeFQAInfo,
 	GetGolfIntroList,
 	GetGolfMatchByDate,
 	GetLatelyMatchByTypeName,
@@ -179,19 +123,12 @@ module.exports = {
 	GetGolfCurriculumByDate,
 	SaveUserInfoCommon,
 	GetUserInfoCommon,
-	PayCommon,
 	SaveLeaveMessageCommon,
-	ValidateUserOpenid,
-	GetMyGolfMakeAppointment,
-	SaveGolfMakeAppointment,
 	SaveSendMsg,
 	GetFansIntro,
-	UpdateOrderPayStatus,
-	RunCommon,
-	SaveDataJsonCommon,
 	WxMessageSend,
-	GetGolfMakeAppointment,
-	GetMakeAppointmentCount,
-	GetAdminCoach,
-	GetGolfCurriculumByCoachID
+	GetIndexBgImageInfo,
+	GetCurriculumBgimageInfo,
+	GetCurriculumInformationList,
+	GetCurriculumInformationInfo
 }

@@ -242,6 +242,10 @@ function getNowObj() {
 	}
 }
 
+function isRealString(stri) {
+	return typeof str === 'string' && str.trim().length > 0;
+}
+
 module.exports = {
 	navigateBack,
   	data,
@@ -265,5 +269,6 @@ module.exports = {
 	extend,
 	addHost,
 	toast,
-	getNowObj
+	getNowObj,
+	isRealString
 }

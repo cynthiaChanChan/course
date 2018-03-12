@@ -17,10 +17,9 @@ Page({
     },
     onLoad: function(options) {
         var _this = this;
-        options.id = 1;
         this.registrationData = wx.getStorageSync("registrationData") || {};
         // 页面初始化 options为页面跳转所带来的参数
-        request.GetBaikeFQAInfo(options.id).then((result) => {
+        request.GetCurriculumInformationInfo(options.id).then((result) => {
             let contentTitle = result.title || "";
             _this.pageTitle = util.getText(contentTitle);
             let content = "";

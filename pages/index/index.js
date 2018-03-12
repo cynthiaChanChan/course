@@ -11,7 +11,7 @@ Page({
         //     url: "../event/event?yy=2018&mm=03&dd=08"
         // })
         wx.navigateTo({
-            url: "../article/article"
+            url: "../week/week"
         })
     },
     goIntro() {

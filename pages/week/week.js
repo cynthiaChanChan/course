@@ -56,6 +56,7 @@ Page({
             beDate,
             beEnd: `${dateObj.year + 1}-12-31`
         });
+        this.getBgByDate();
         return firstDay;
     },
     setWholeMonth: function(isChoosen) {
@@ -169,8 +170,24 @@ Page({
         //同步更新日期选择器的显示天
         beDate[2] = util.formatNumber(weekList[index].num);
         this.setData({weekList, chosenIdx, beDate});
+        this.getBgByDate();
         const now = util.formatDate(`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()} 00:00:00`);
         //this.GetGolfCurriculumByCoachID(coach_id, `${this.year}-${util.formatNumber(this.month)}-${util.formatNumber(weekList[index].num)}`);
+    },
+    getBgByDate() {
+        const beDate = this.data.beDate;
+        const date = `${beDate[0]}-${beDate[1]}-${beDate[2]}`
+        request.GetCurriculumBgimageInfo(date).then(res => {
+            const bgImg = util.addHost(res.bgimage);
+            request.GetIndexBgImageInfo(date).then(response => {
+                const constellation = response.gongli.slice(-3);;
+                const nongli = response.nongli.replace(/属/, ",").split(",");
+                const runarDay = nongli[0].slice(-3, -1);
+                const suici = response.suici.replace(/\s/g, "").replace(/[年月日]/g, ",").split(",");
+                const runar = `农历 ${suici[0]}【${nongli[1]}】年  ${suici[1]}月  ${runarDay}  ${constellation}`;   
+                this.setData({bgImg, runar})
+            })
+        })
     },
     findTheWeek() {
         for (let i = 0; i < this.dateObj.WholeMonth.length -1; i += 1) {

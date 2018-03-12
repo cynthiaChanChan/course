@@ -176,7 +176,6 @@ swiper {
     color: #fff;
     overflow-y: auto;
     min-height: 100%;
-    background: bottom /cover url("https://www.korjo.cn/xcx/courseImg/poster01.jpg") no-repeat;
 }
 
 .courses-container .course {

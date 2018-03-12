@@ -9,7 +9,7 @@
                 </picker>              
             </view>
             <view class="lunar">
-                <text space="nbsp">农历 丁酉【鸡】年  冬月  初八  摩羯座   </text>
+                <text space="nbsp">{{runar}}</text>
             </view>
             <view class="goToday" bindtap="goToday"><text>返回\n今天</text></view>
         </view>
@@ -29,7 +29,7 @@
             </block>
         </swiper>
     </view>
-    <view class="content-container">
+    <view class="content-container" style="background: bottom /cover url({{bgImg}}) no-repeat;">
        <view class="courses-container">
             <view class="course">
                 <view class="item">

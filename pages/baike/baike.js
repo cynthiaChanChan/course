@@ -9,24 +9,16 @@ Page({
         this.getTypeList();
     },
     getTypeList() {
-        request.GetBaikeTypeList(29).then((res) => {
+        request.GetCurriculumInformationList().then((res) => {
             const question_list = res;
             this.setData({question_list});
         })
     },
     goNews: function (e) {
         // 跳到下一页
-        var data = e.currentTarget.dataset;
-        request.GetBaikeTypeByParentID(data.id).then((result) => {
-            if (result.length > 0) {
-                wx.navigateTo({
-                    url: `/pages/supnews/supnews?title=${data.title}&id=${data.id}`
-                })
-            } else {
-                wx.navigateTo({
-                    url: `/pages/news/news?title=${data.title}&id=${data.id}&image=${data.image}`
-                })
-            }
+        var dataset = e.currentTarget.dataset;
+        wx.navigateTo({
+            url: "../article/article?id=" + dataset.id
         })
     },
 })

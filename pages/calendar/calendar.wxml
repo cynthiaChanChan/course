@@ -3,9 +3,9 @@
 		<view id="calender-title" class="clearfix">
 		    <view class="goBack" bindtap="goBack"><text>返回</text></view>
 			<view id="date">
-				<view class="arrow left" hidden="{{isLeftHidden}}" data-dir="left" bindtap="chooseDate"><image src="../../images/pre.png" mode="widthFix"></image></view>
+				<view class="arrow left" hidden="{{isLeftHidden}}" data-dir="left" bindtap="chooseDate"><image src="{{img}}/pre.png" mode="widthFix"></image></view>
 				<view class="time">{{time}}</view>
-				<view class="arrow right" hidden="{{isRightHidden}}" data-dir="right" bindtap="chooseDate"><image src="../../images/next.png" mode="widthFix"></image></view>
+				<view class="arrow right" hidden="{{isRightHidden}}" data-dir="right" bindtap="chooseDate"><image src="{{img}}/next.png" mode="widthFix"></image></view>
 			</view>
 		</view>
 		<view id="days">
